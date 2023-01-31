@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 '''
 @file       at86rf215-ping-pong.py
@@ -63,17 +63,18 @@ print(f'Starting program at port {args.port} with bauds {args.baudrate}.')
 
 while (not finished) and (udpServerData := next(collectorData)):
     try:
-        print(
-            f"addr: {udpServerData['addr']}",
-            f"txCounter: {udpServerData['txCount']}",
-            f"rxCounter: {udpServerData['rxCount']}",
-            f"txPower: {udpServerData['txPower']}",
-            f"channel: {udpServerData['channel']}",
-            f"rssi: {udpServerData['rssi']}",
-            sep="\n"
-        )
+        if udpServerData['result'] == 'ok':
+            print(
+                f"addr: {udpServerData['data']['addr']}",
+                f"txCounter: {udpServerData['data']['txCount']}",
+                f"rxCounter: {udpServerData['data']['rxCount']}",
+                f"txPower: {udpServerData['data']['txPower']}",
+                f"channel: {udpServerData['data']['channel']}",
+                f"rssi: {udpServerData['data']['rssi']}",
+                sep="\n"
+            )
 
-        dbClient.insert(udpServerData)
+            dbClient.insert(udpServerData['data'])
 
     except Exception as e:
         print(e)

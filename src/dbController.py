@@ -3,9 +3,9 @@ from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 
-TOKEN = '4Blao0_msfKmLY_ESbzokZIQlUCJw2Pjth5LXP3hs1_jkkl-xj_4b2yxgnElbI80Pw1uOgxGku6yZPt4XMRG3w=='
+TOKEN = 'xieC8nuRsu6nzlmtgek39_-qETB_ur0wGx0rwgGGM5lvkQjxq1uvDVucB4lfUOsBQT7ULdDnNvDZ9nKPpioyEw=='
 ORG = 'ifpb'
-BUCKET = 'main'
+BUCKET = 'testbed'
 
 
 def create_client(dbAddr='localhost'):

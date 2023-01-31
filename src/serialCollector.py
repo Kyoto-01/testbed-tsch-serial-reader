@@ -18,12 +18,15 @@ class UDPServerSerialCollector:
                 addr, txCount, rxCount, txPower, channel, rssi = message.split(',')
 
                 return {
-                    'addr': addr,
-                    'txCount': txCount,
-                    'rxCount': rxCount,
-                    'txPower': txPower,
-                    'channel': channel,
-                    'rssi': rssi,
+                    'data': {
+                        'addr': addr,
+                        'txCount': txCount,
+                        'rxCount': rxCount,
+                        'txPower': txPower,
+                        'channel': channel,
+                        'rssi': rssi,
+                    },
+                    'result': 'ok'
                 }
             
             except Exception as e:
@@ -34,3 +37,5 @@ class UDPServerSerialCollector:
             data = self.__collect_last() 
             if data:
                 yield data
+            else:
+                yield {'result': 'fail'}
