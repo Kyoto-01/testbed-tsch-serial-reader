@@ -5,17 +5,24 @@ Módulo do testbed TSCH que coleta os dados enviados pelos motes através da por
 ## 1. Preparação do ambiente
 
 ### 1.1 Instalação do InfluxDB 
+
 Caso deseje persistir os dados coletados, siga os tutoriais abaixo para instalar e realizar as configurações iniciais do InfluxDB:
 * [Instalação do InfluxDB](https://github.com/Kyoto-01/testbed-tsch/blob/main/doc/howto/influxdb/start/install-influxdb.md)
 * [Configuração do InfluxDB](https://github.com/Kyoto-01/testbed-tsch/blob/main/doc/howto/influxdb/start/setup-influxdb.md)
 
-### 1.2 Clonagem do repositório
+### 1.2 Instalação de ferramentas necessárias
+
+```
+sudo apt update && sudo apt install -y git python3-pip
+```
+
+### 1.3 Clonagem do repositório
 
 ```
 git clone https://github.com/Kyoto-01/testbed-tsch-serial-reader.git
 ```
 
-### 1.3 Setup da ferramenta
+### 1.4 Setup da ferramenta
 
 ```
 cd testbed-tsch-serial-reader/
@@ -25,11 +32,11 @@ cd testbed-tsch-serial-reader/
 chmod +x setup.sh && ./setup.sh
 ```
 
-### 1.4 Arquivo de configuração
+### 1.5 Arquivo de configuração
 
 Se ainda não existir, crie um arquivo de configuração chamado ```config.ini``` em ```testbed-tsch-serial-reader``` e preencha-o seguindo o modelo disponibilizado em ```testbed-tsch-serial-reader/config.example.ini```.
 
-#### 1.4.1 InfluxDB
+#### 1.5.1 InfluxDB
 Caso deseje persistir os dados coletados, vá até a seção *\[influx2\]* do arquivo de configuração ```config.ini``` e atribua os valores de *url*, *org* e *token* de acordo com as configurações de seu InfluxDB. Para visualizar essas configurações siga o tutorial disponível [aqui](https://github.com/Kyoto-01/testbed-tsch/blob/main/doc/howto/influxdb/start/setup-influxdb.md).
 
 ## 2. Utilização da ferramenta

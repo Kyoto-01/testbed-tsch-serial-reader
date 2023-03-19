@@ -7,6 +7,7 @@ pip install -r requirements.txt
 sudo usermod -a -G plugdev $USER
 sudo usermod -a -G dialout $USER
 
+# Create configure file
 if [ ! -f config.ini ]
 then
     cat config.example.ini > config.ini
