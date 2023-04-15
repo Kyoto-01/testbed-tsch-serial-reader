@@ -24,6 +24,7 @@ from testbed.collector_manager import TestbedCollectorManager
 CONFIG_FILE = '../config.ini'
 
 config = {
+    'testbed_name': None,
     'serial_ports': None,
     'serial_baudrate': None,
     'data_persist': True
@@ -40,6 +41,7 @@ def signal_handler(sig, frame):
 def setup_from_cmdline():
     parser = argparse.ArgumentParser(description="")
 
+    parser.add_argument("-t", "--testbed", type=str)
     parser.add_argument("-p", "--ports", type=str)
     parser.add_argument("-b", "--baudrate", type=int, default=115200)
     parser.add_argument("-n", "--nopersist", action='store_true')
@@ -50,6 +52,7 @@ def setup_from_cmdline():
         config['serial_ports'] = args.ports.split(',')
         config['serial_ports'] = [p.strip() for p in config['serial_ports']]
 
+    config['testbed_name'] = args.testbed
     config['serial_baudrate'] = args.baudrate
     config['data_persist'] = not args.nopersist
 
@@ -138,7 +141,8 @@ def main():
     else:
         collectorManager = TestbedCollectorManager(
             collectorList=collectors,
-            database=database
+            database=database,
+            testbedName=config['testbed_name']
         )
 
         show_banner(

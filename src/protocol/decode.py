@@ -22,23 +22,25 @@ def decode_protocol_data(data: 'str') -> 'dict':
 def decode_server_data(data: 'list') -> 'dict':
     return {
         "firmtype": data[0],
-        "addrsend": data[1],
-        "addrrecv": data[2],
-        "tx": data[3],
-        "rx": data[4],
-        "txpwr": data[5],
-        "ch": data[6],
-        "rssi": data[7]
+        "addr": data[1],
+        "peer": data[2],
+        "rssi": data[3],
+        "datalen": data[4],
+        "tx": data[5],
+        "rx": data[6],
+        "txpwr": data[7],
+        "ch": data[8],
     }
 
 
 def decode_client_data(data: 'list') -> 'dict':
     return {
         "firmtype": data[0],
-        "addrsend": data[1],
-        "addrrecv": data[2],
-        "tx": data[3],
-        "rx": data[4],
-        "txpwr": data[5],
-        "ch": data[6]
+        "addr": data[1],
+        "peer": data[2],
+        "datalen": data[3],
+        "tx": data[4],
+        "rx": data[5],
+        "txpwr": data[6],
+        "ch": data[7]
     }

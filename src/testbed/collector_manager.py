@@ -14,8 +14,11 @@ class TestbedCollectorManager:
         self,
         collectorList: 'list[SerialCollector]',
         database: 'InfluxDBConnection',
-        testbedName=f'testbed-{str(uuid4())}'
+        testbedName=None
     ):
+        if not testbedName:
+            testbedName = f'testbed-{str(uuid4())}'
+            
         self._collectorList = collectorList
         self._database = database
         self._testbedName = testbedName

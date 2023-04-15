@@ -54,6 +54,7 @@ sudo -E env PATH=$PATH ./main.py [-p | --ports <device_name_1>[,...,<device_name
 ```
 ---
 
+* **-t | --testbed**: Nome do testbed.
 * **-p | --ports**: Lista de portas seriais que serão lidas pela ferramenta.
 
 * **-b | --baudrate**: Inteiro que indica a taxa de atualização da porta serial.
