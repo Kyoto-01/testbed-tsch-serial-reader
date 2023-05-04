@@ -1,5 +1,6 @@
 FIRMTYPE_SERVER = 'server'
 FIRMTYPE_CLIENT = 'client'
+FIRMWARE_PROTOCOL_FIELD_COUNT = 9
 
 
 def decode_protocol_data(data: 'str') -> 'dict':
@@ -8,7 +9,7 @@ def decode_protocol_data(data: 'str') -> 'dict':
 
     ret = {}
 
-    if data:
+    if len(data) == FIRMWARE_PROTOCOL_FIELD_COUNT:
         firmtype = data[0]
 
         if firmtype == FIRMTYPE_SERVER:

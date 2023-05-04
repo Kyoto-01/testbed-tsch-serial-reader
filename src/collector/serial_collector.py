@@ -43,13 +43,12 @@ class SerialCollector:
         return self._serial.closed
 
     def collect(self):
+        message = None
+
         if not self.is_closed():
             message = self._serial.readline()
 
             if message:
-                try:
-                    message = message.decode()
-                except Exception as e:
-                    message = None
+                message = message.decode()
 
-            return message
+        return message

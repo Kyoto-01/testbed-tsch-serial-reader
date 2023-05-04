@@ -1,6 +1,7 @@
 from threading import Thread, Lock
 from datetime import datetime
 from uuid import uuid4
+from serial import SerialException
 
 from collector.serial_collector import SerialCollector
 from database.db_connection import InfluxDBConnection
@@ -69,15 +70,21 @@ class TestbedCollectorManager:
 
     def _manage_collector(self, collector: 'SerialCollector'):
         while not self._finished:
-            data = collector.collect()
-
-            if data:
-                data = decode_protocol_data(data)
-
+            try:
+                data = collector.collect()
+            except (SerialException, UnicodeDecodeError) as ex:
+                print('ERROR:', ex)
+            else:
                 if data:
-                    with self._mutex:
-                        self._persist_collected_data(data)
-                        self._show_collected_data(data, collector.port)
+                    data = decode_protocol_data(data)
+
+                    if data:
+                        with self._mutex:
+                            self._persist_collected_data(data)
+                            self._show_collected_data(
+                                data=data, 
+                                port=collector.port
+                            )
 
     def close(self):
         self._finished = True
