@@ -1,20 +1,30 @@
 FIRMTYPE_SERVER = 'server'
 FIRMTYPE_CLIENT = 'client'
-FIRMWARE_PROTOCOL_FIELD_COUNT = 9
+
+SERVER_PROTOCOL_FIELD_COUNT = 9
+CLIENT_PROTOCOL_FIELD_COUNT = 8
 
 
 def decode_protocol_data(data: 'str') -> 'dict':
     data = data.split(',')
     data = [item.strip() for item in data]
 
+    fieldCount = len(data)
+
     ret = {}
 
-    if len(data) == FIRMWARE_PROTOCOL_FIELD_COUNT:
+    if fieldCount > 0:
         firmtype = data[0]
 
-        if firmtype == FIRMTYPE_SERVER:
+        if (
+            firmtype == FIRMTYPE_SERVER and 
+            fieldCount == SERVER_PROTOCOL_FIELD_COUNT
+        ):
             ret = decode_server_data(data)
-        elif firmtype == FIRMTYPE_CLIENT:
+        elif (
+            firmtype == FIRMTYPE_CLIENT and 
+            fieldCount == CLIENT_PROTOCOL_FIELD_COUNT
+        ):
             ret = decode_client_data(data)
 
     return ret
