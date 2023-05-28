@@ -39,6 +39,13 @@ class TestbedCollectorManager:
         return self._testbedName
 
     def start(self):
+
+        self._database.insert(
+            bucket=self._testbedName,
+            measurement='general',
+            fields={'status': 'start'}
+        )
+                    
         for collector in self._collectorList:
             Thread(
                 target=self._manage_collector,
@@ -87,4 +94,10 @@ class TestbedCollectorManager:
                             )
 
     def close(self):
+        self._database.insert(
+            bucket=self._testbedName,
+            measurement='general',
+            fields={'status': 'stop'},
+        )
+                
         self._finished = True
