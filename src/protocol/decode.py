@@ -18,12 +18,12 @@ def decode_protocol_data(data: 'str') -> 'dict':
 
         if (
             firmtype == FIRMTYPE_SERVER and 
-            fieldCount == SERVER_PROTOCOL_FIELD_COUNT
+            fieldCount >= SERVER_PROTOCOL_FIELD_COUNT
         ):
             ret = decode_server_data(data)
         elif (
             firmtype == FIRMTYPE_CLIENT and 
-            fieldCount == CLIENT_PROTOCOL_FIELD_COUNT
+            fieldCount >= CLIENT_PROTOCOL_FIELD_COUNT
         ):
             ret = decode_client_data(data)
 
